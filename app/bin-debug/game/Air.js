@@ -14,18 +14,20 @@ var Air = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Air.prototype.initView = function () {
-        // let cartoon: egret.Bitmap = Utils.createBitmapByName('cartoon_png')
-        // this.addChild(cartoon)
+        // 添加背景
         var bg = new BgMap();
         this.addChild(bg);
-        // this.addEventListener(egret.Event.ENTER_FRAME, ()=>{
-        //     var now = egret.getTimer();
-        //     console.log(now)
-        //     txInput.x = 10;
-        // }, this);
-    };
-    Air.prototype.fn = function () {
-        console.log(1111);
+        // 添加飞机
+        var plane = new Plane();
+        this.addChild(plane);
+        // 飞机坐标初始位置
+        plane.x = (Utils.getStageWidth() / 2) - (plane.width / 2);
+        plane.y = (Utils.getStageHeight() * 2 / 3);
+        this.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE, function (e) {
+            plane.fly(e.stageX - (plane.width / 2), e.stageY - (plane.height / 2));
+            // plane.x =e.stageX - (plane.width / 2)
+            // plane.y = e.stageY - (plane.height / 2)
+        }, this);
     };
     return Air;
 }(BaseScene));

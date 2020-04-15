@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,bg2_jpg,cartoon_png,img_bg_level_1_jpg",
+			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,bg2_jpg,cartoon_png,img_bg_level_1_jpg,hero_png",
 			"name": "preload"
 		}
 	],
@@ -35,6 +35,11 @@
 			"name": "img_bg_level_1_jpg",
 			"type": "image",
 			"url": "assets/images/bg/img_bg_level_1.jpg"
+		},
+		{
+			"name": "hero_png",
+			"type": "image",
+			"url": "assets/images/plane/hero.png"
 		}
 	]
 }
