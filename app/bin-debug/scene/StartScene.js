@@ -25,7 +25,7 @@ var StartScene = (function (_super) {
         startBtn.x = (Utils.getStageWidth() - startBtn.width) / 2;
         startBtn.y = Utils.getStageHeight() - 350;
         Utils.bitmapToBtn(startBtn, function () {
-            console.log('开始游戏');
+            // 开始游戏
             SceneController.showPlayScene();
         });
     };

@@ -53,7 +53,6 @@ var LoadingUI = (function (_super) {
         this.textField.text = "Loading...0%";
     };
     LoadingUI.prototype.onProgress = function (current, total) {
-        console.log(current);
         var per = current * 100 / total;
         this.textField.text = "Loading..." + per.toFixed(0) + "%";
     };

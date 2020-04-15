@@ -1,110 +1,156 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
+/**
+ * @desc 基于 egret.HttpRequest 封装的 Http 类，主要用来进行网络请求封装
+ * @desc post/get 方法返回的都是 promise 对象，可以支持新的 promise/await 新的语法。
+ * @example
+ * let res = await new Http().post('/api/test', {id: 1});
+ */
 var Http = (function () {
+    /**
+     * 构造函数
+     */
     function Http() {
-        this.baseUrl = '';
+        this.request = new egret.HttpRequest();
+        this.request.responseType = egret.HttpResponseType.TEXT;
+        return this;
     }
-    Object.defineProperty(Http, "instance", {
-        get: function () {
-            if (!this.http) {
-                this.http = new Http();
-            }
-            return this.http;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Http.prototype.request = function (_a) {
+    /**
+     * post 方法
+     * @param url 一个用来包含发送请求的 url 字符串
+     * @param param 发送到服务器的数据
+     */
+    Http.prototype.post = function (url, param) {
         var _this = this;
-        var _b = _a.method, method = _b === void 0 ? egret.HttpMethod.GET : _b, url = _a.url, _c = _a.params, params = _c === void 0 ? {} : _c, _d = _a.headers, headers = _d === void 0 ? {} : _d;
-        if (!(/http(|s):\/\//.test(url))) {
-            url = this.baseUrl + url;
+        if (param === void 0) { param = {}; }
+        var timer = null;
+        var timeout = Http.timeout;
+        return new Promise(function (resolve, reject) {
+            _this.request.open(_this.getUrl(url), egret.HttpMethod.POST);
+            _this.request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            _this.request.send(_this.formatPostData(param));
+            _this.request.addEventListener(egret.Event.COMPLETE, function (e) {
+                var request = e.currentTarget;
+                egret.clearTimeout(timer);
+                resolve(JSON.parse(request.response));
+            }, _this);
+            _this.request.addEventListener(egret.IOErrorEvent.IO_ERROR, function (e) {
+                egret.clearTimeout(timer);
+                reject(e);
+            }, _this);
+            timer = egret.setTimeout(function () {
+                reject({
+                    msg: "\u8BE5\u94FE\u63A5\u5DF2\u8D85\u65F6: " + timeout,
+                    url: url,
+                    param: param
+                });
+            }, _this, timeout);
+        });
+    };
+    /**
+     * get 方法
+     * @param url 一个用来包含发送请求的 url 字符串
+     * @param param 发送到服务器的数据
+     */
+    Http.prototype.get = function (url, param) {
+        var _this = this;
+        if (param === void 0) { param = {}; }
+        var timer = null;
+        var timeout = Http.timeout;
+        return new Promise(function (resolve, reject) {
+            var getData = _this.formatPostData(param);
+            var real_url = _this.getUrl(url);
+            if (getData !== '') {
+                real_url += "?" + getData;
+            }
+            _this.request.open(real_url, egret.HttpMethod.GET);
+            _this.request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            _this.request.send();
+            _this.request.addEventListener(egret.Event.COMPLETE, function (e) {
+                var request = e.currentTarget;
+                egret.clearTimeout(timer);
+                resolve(JSON.parse(request.response));
+            }, _this);
+            _this.request.addEventListener(egret.IOErrorEvent.IO_ERROR, function (e) {
+                egret.clearTimeout(timer);
+                reject(e);
+            }, _this);
+            timer = egret.setTimeout(function () {
+                reject({
+                    msg: "\u8BE5\u94FE\u63A5\u5DF2\u8D85\u65F6: " + timeout,
+                    url: url,
+                    param: param
+                });
+            }, _this, timeout);
+        });
+    };
+    /**
+     * 获取完整 url 路径，（主要用来区别本地环境还是什么环境的）
+     * @param url 一个用来包含发送请求的 url 字符串
+     */
+    Http.prototype.getUrl = function (url) {
+        if (typeof Http.domain === 'string' && Http.domain.length > 0) {
+            return "http://" + Http.domain;
         }
-        var _params = '';
-        var _headers = {};
-        _headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        // 如果有传入，则覆盖掉
-        for (var key in headers) {
-            _headers[key] = headers[key];
-        }
-        if (_headers['Content-Type'] === 'application/json') {
-            _params = JSON.stringify(params);
-            _params = _params.replace(/\+/g, "%2B").replace(/\&/g, "%26");
-            // console.log(_params)
+        else if (typeof Http.domain === 'function') {
+            var domain = Http.domain();
+            if (!domain || domain === '') {
+                return url;
+            }
+            return "http://" + domain + url;
         }
         else {
-            for (var key in params) {
-                _params += key + "=" + ('' + params[key]).replace(/\&/g, "%26") + "&";
-            }
-            _params = _params.replace(/\+/g, "%2B");
-            // console.log(_params)
-            if (_params.length > 0) {
-                _params = _params.substring(0, _params.length - 1);
-            }
-            if (method === egret.HttpMethod.GET) {
-                url += "?" + _params;
-            }
+            return url;
         }
-        return new Promise(function (resolve, reject) {
-            var request = new egret.HttpRequest();
-            request.responseType = egret.HttpResponseType.TEXT;
-            request.open(url, method);
-            for (var key in _headers) {
-                request.setRequestHeader(key, _headers[key]);
-            }
-            if (method === egret.HttpMethod.GET) {
-                request.send();
-            }
-            else {
-                request.send(_params);
-            }
-            request.addEventListener(egret.Event.COMPLETE, function (event) {
-                dealResult(event);
-            }, _this);
-            request.addEventListener(egret.IOErrorEvent.IO_ERROR, function (event) {
-                dealResult(event, false);
-            }, _this);
-            function dealResult(event, success) {
-                if (success === void 0) { success = true; }
-                var response;
+    };
+    /**
+     * 设置请求的域名
+     */
+    Http.setDomain = function (domain) {
+        if (typeof domain === 'string' || typeof domain === 'function') {
+            Http.domain = domain;
+        }
+        else {
+            console.log('setDomain 的参数 domain 必须是一个字符串或者函数');
+        }
+    };
+    /**
+     * 格式化传参, eg: {p1: a, p2: b}  ==>  'p1=a&p2=b'
+     * @param param 发送到服务器的数据
+     */
+    Http.prototype.formatPostData = function (param) {
+        var arr = [];
+        var val = '';
+        for (var key in param) {
+            // 如果是数组，或者是对象，则进行 JSON.stringify
+            if (typeof param[key] === 'object') {
                 try {
-                    response = JSON.parse(request.response);
+                    val = JSON.stringify(param[key]);
                 }
                 catch (e) {
-                    response = request.response;
+                    console.log("Http.formatPostData \u53C2\u6570\u5F02\u5E38: ", param);
+                    val = '';
                 }
-                if (success) {
-                    resolve(response);
-                }
-                else {
-                    reject(response);
-                }
+                arr.push(key + "=" + val);
             }
-        });
+            else {
+                arr.push(key + "=" + param[key]);
+            }
+        }
+        if (arr.length <= 0) {
+            return undefined;
+        }
+        return arr.join('&');
     };
-    Http.prototype.setBaseUrl = function (baseUrl) {
-        this.baseUrl = baseUrl;
-    };
-    Http.prototype.get = function (url, params, headers) {
-        if (params === void 0) { params = {}; }
-        if (headers === void 0) { headers = {}; }
-        return this.request({
-            url: url,
-            params: params,
-            headers: headers
-        });
-    };
-    Http.prototype.post = function (url, params, headers) {
-        if (params === void 0) { params = {}; }
-        if (headers === void 0) { headers = {}; }
-        return this.request({
-            method: egret.HttpMethod.POST,
-            url: url,
-            params: params,
-            headers: headers
-        });
-    };
+    /**
+     * 域名
+     */
+    Http.domain = null;
+    /**
+     * 设置的 Http 请求超时时间, 默认30s
+     */
+    Http.timeout = 30000;
     return Http;
 }());
 __reflect(Http.prototype, "Http");

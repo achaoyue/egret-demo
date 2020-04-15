@@ -14,7 +14,7 @@ class StartScene extends BaseScene {
         startBtn.y = Utils.getStageHeight() - 350
 
         Utils.bitmapToBtn(startBtn, ()=> {
-            console.log('开始游戏')
+            // 开始游戏
             SceneController.showPlayScene()
         })
 

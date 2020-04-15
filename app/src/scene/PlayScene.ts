@@ -1,29 +1,53 @@
 class PlayScene extends BaseScene {
+
+    private infoText: egret.TextField;
+
     protected initView() {
 
-        // 背景
-        let bg: egret.Bitmap = Utils.createBitmapByName('bg2_jpg')
-        this.addChild(bg)
-        bg.x = (Utils.getStageWidth() - bg.width) / 2
-        bg.y = (Utils.getStageHeight() - bg.height) / 2
+        this.infoText = new egret.TextField()
+        this.infoText.y = 10
+        this.infoText.x = 10
+        this.infoText.text = 'isHit'
+        this.addChild(this.infoText)
 
-        let egret_icon: egret.Bitmap = Utils.createBitmapByName('egret_icon_png')
-        this.addChild(egret_icon)
-        egret_icon.x = (Utils.getStageWidth() - egret_icon.width) / 2
-        egret_icon.y = 100
+        var shp = new egret.Shape();
 
-        egret_icon.anchorOffsetX = (egret_icon.width) / 2
-        egret_icon.anchorOffsetY = egret_icon.height / 2
+        shp.graphics.beginFill(0xff0000);
+        shp.graphics.drawRect(0, 0, 100, 100);
+        shp.graphics.endFill();
+
+        shp.width = 100;
+        shp.height = 100;
+
+        shp.anchorOffsetX = shp.width / 2;
+        shp.anchorOffsetY = shp.height / 2;
+
+        shp.x = 10
+        shp.y = 60
+
+        this.addChild(shp);
 
 
-        let change = () => {
-            let tween = egret.Tween.get(egret_icon)
-            tween.to({ rotation: 360 }, 2500)
-            tween.call(change, this)
-        }
 
-        change()
 
+
+
+        this.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, (evt: egret.TouchEvent) => {
+            shp.x = evt.localX;
+            shp.y = evt.localY;
+            egret.Tween.removeTweens(shp)
+            
+
+            var tw = egret.Tween.get(shp)
+           
+
+            tw.to({ rotation: 360 }, 2000)
+           
+
+            var isHit: boolean = shp.hitTestPoint(10, 10);
+            this.infoText.text = "isHit: " + isHit;
+
+        }, this);
 
     }
 }

@@ -1,101 +1,155 @@
+/**
+ * @desc 基于 egret.HttpRequest 封装的 Http 类，主要用来进行网络请求封装
+ * @desc post/get 方法返回的都是 promise 对象，可以支持新的 promise/await 新的语法。
+ * @example 
+ * let res = await new Http().post('/api/test', {id: 1});
+ */
 class Http {
+    /**
+     * egert 的请求对象实例
+     */
+    private request: egret.HttpRequest;
 
-    private baseUrl: string = ''
+    /**
+     * 域名
+     */
+    private static domain: any = null;
 
-    public static http: Http
+    /**
+     * 设置的 Http 请求超时时间, 默认30s
+     */
+    public static timeout: number = 30000;
 
-    public static get instance() {
-        if (!this.http) {
-            this.http = new Http()
-        }
-        return this.http
+    /**
+     * 构造函数
+     */
+    public constructor() {
+        this.request = new egret.HttpRequest();
+        this.request.responseType = egret.HttpResponseType.TEXT;
+        return this;
     }
 
-    private constructor() {
-        
+    /**
+     * post 方法
+     * @param url 一个用来包含发送请求的 url 字符串
+     * @param param 发送到服务器的数据
+     */
+    public post(url: string, param: any = {}) {
+        let timer = null;
+        const timeout = Http.timeout;
+
+        return new Promise((resolve, reject) => {
+            this.request.open(this.getUrl(url), egret.HttpMethod.POST);
+            this.request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            this.request.send(this.formatPostData(param));
+            this.request.addEventListener(egret.Event.COMPLETE, (e: egret.Event) => {
+                const request = <egret.HttpRequest>e.currentTarget;
+                egret.clearTimeout(timer);
+                resolve(JSON.parse(request.response));
+            }, this);
+            this.request.addEventListener(egret.IOErrorEvent.IO_ERROR, (e: egret.IOErrorEvent) => {
+                egret.clearTimeout(timer);
+                reject(e);
+            }, this);
+            timer = egret.setTimeout(() => {
+                reject({
+                    msg: `该链接已超时: ${timeout}`,
+                    url,
+                    param
+                });
+            }, this, timeout);
+        });
     }
 
-    private request({method = egret.HttpMethod.GET, url, params = {}, headers = {}}): Promise<any> {
-        if (!(/http(|s):\/\//.test(url))) {
-            url = this.baseUrl + url
-        }
-        let _params: any = ''
-        let _headers = {}
-        _headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        // 如果有传入，则覆盖掉
-        for (let key in headers) {
-            _headers[key] = headers[key]
-        }
-        if (_headers['Content-Type'] === 'application/json') {
-            _params = JSON.stringify(params)
-            _params = _params.replace(/\+/g, "%2B").replace(/\&/g, "%26")
-            // console.log(_params)
+    /**
+     * get 方法
+     * @param url 一个用来包含发送请求的 url 字符串
+     * @param param 发送到服务器的数据
+     */
+    public get(url: string, param: any = {}) {
+        let timer = null;
+        const timeout = Http.timeout;
+
+        return new Promise((resolve, reject) => {
+            const getData = this.formatPostData(param);
+            let real_url = this.getUrl(url);
+
+            if (getData !== '') {
+                real_url += `?${getData}`;
+            }
+            this.request.open(real_url, egret.HttpMethod.GET);
+            this.request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            this.request.send();
+            this.request.addEventListener(egret.Event.COMPLETE, (e: egret.Event) => {
+                const request = <egret.HttpRequest>e.currentTarget;
+                egret.clearTimeout(timer);
+                resolve(JSON.parse(request.response));
+            }, this);
+            this.request.addEventListener(egret.IOErrorEvent.IO_ERROR, (e: egret.IOErrorEvent) => {
+                egret.clearTimeout(timer);
+                reject(e);
+            }, this);
+            timer = egret.setTimeout(() => {
+                reject({
+                    msg: `该链接已超时: ${timeout}`,
+                    url,
+                    param
+                });
+            }, this, timeout);
+        });
+    }
+
+    /**
+     * 获取完整 url 路径，（主要用来区别本地环境还是什么环境的）
+     * @param url 一个用来包含发送请求的 url 字符串
+     */
+    private getUrl(url: string): string {
+        if (typeof Http.domain === 'string' && Http.domain.length > 0) {
+            return `http:\/\/${Http.domain}`;
+        } else if (typeof Http.domain === 'function') {
+            const domain = Http.domain();
+
+            if (!domain || domain === '') { return url; }
+            return `http:\/\/${domain}${url}`;
         } else {
-            for (let key in params) {
-                _params += `${key}=${('' + params[key]).replace(/\&/g, "%26")}&`
-            }
-            _params = _params.replace(/\+/g, "%2B")
-            // console.log(_params)
-            if (_params.length > 0) {
-                _params = _params.substring(0, _params.length - 1)
-            }
-            if (method === egret.HttpMethod.GET) {
-                url += `?${_params}`
+            return url;
+        }
+    }
+
+    /**
+     * 设置请求的域名
+     */
+    public static setDomain(domain: any) {
+        if (typeof domain === 'string' || typeof domain === 'function') {
+            Http.domain = domain;
+        } else {
+            console.log('setDomain 的参数 domain 必须是一个字符串或者函数');
+        }
+    }
+
+    /**
+     * 格式化传参, eg: {p1: a, p2: b}  ==>  'p1=a&p2=b'
+     * @param param 发送到服务器的数据
+     */
+    private formatPostData(param: any): string {
+        const arr = [];
+        let val = '';
+
+        for (const key in param) {
+            // 如果是数组，或者是对象，则进行 JSON.stringify
+            if (typeof param[key] === 'object') {
+                try {
+                    val = JSON.stringify(param[key]);
+                } catch (e) {
+                    console.log(`Http.formatPostData 参数异常: `, param);
+                    val = '';
+                }
+                arr.push(`${key}=${val}`);
+            } else {
+                arr.push(`${key}=${param[key]}`);
             }
         }
-
-        return new Promise((resolve, reject)=> {
-            let request = new egret.HttpRequest()
-            request.responseType = egret.HttpResponseType.TEXT
-            request.open(url, method)
-            for (let key in _headers) {
-                request.setRequestHeader(key, _headers[key])
-            }
-            if (method === egret.HttpMethod.GET) {
-                request.send()
-            } else {
-                request.send(_params)
-            }
-            request.addEventListener(egret.Event.COMPLETE, (event)=> {
-                dealResult(event)
-            }, this)
-            request.addEventListener(egret.IOErrorEvent.IO_ERROR, (event)=> {
-                dealResult(event, false)
-            }, this)
-            function dealResult(event, success = true) {
-                let response
-                try {
-                    response = JSON.parse(request.response)
-                } catch(e) {
-                    response = request.response
-                }
-                if (success) {
-                    resolve(response)
-                } else {
-                    reject(response)
-                }
-            }
-        })
-    }
-
-    public setBaseUrl(baseUrl: string) {
-        this.baseUrl = baseUrl
-    }
-
-    public get(url: string, params = {}, headers = {}): Promise<any> {
-        return this.request({
-            url: url,
-            params: params,
-            headers: headers
-        })
-    }
-
-    public post(url: string, params = {}, headers = {}): Promise<any> {
-        return this.request({
-            method: egret.HttpMethod.POST,
-            url: url,
-            params: params,
-            headers: headers
-        })
+        if (arr.length <= 0) { return undefined; }
+        return arr.join('&');
     }
 }
