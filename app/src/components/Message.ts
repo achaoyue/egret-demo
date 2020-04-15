@@ -3,7 +3,7 @@
 //  * @class
 //  * @desc 信息提示类
 //  * @example 
-//  * Message.show('sss')
+//  * Message.show('提示信息')
 //  */
 
 class Message extends egret.DisplayObjectContainer {

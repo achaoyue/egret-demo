@@ -1,0 +1,33 @@
+{
+	"groups":[
+	{
+		"keys":"bg_jpg,egret_icon_png,description_json,btn_start_png,bg2_jpg,cartoon_png",
+		"name":"preload"
+	}],
+	"resources":[
+	{
+		"name":"bg_jpg",
+		"type":"image",
+		"url":"assets/images/bg.jpg"
+	},
+	{
+		"name":"egret_icon_png",
+		"type":"image",
+		"url":"assets/images/egret_icon.png"
+	},
+	{
+		"name":"btn_start_png",
+		"type":"image",
+		"url":"assets/images/btn_start.png"
+	},
+	{
+		"name":"bg2_jpg",
+		"type":"image",
+		"url":"assets/images/bg2.jpg"
+	},
+	{
+		"name":"cartoon_png",
+		"type":"image",
+		"url":"assets/images/cartoon.png"
+	}]
+}

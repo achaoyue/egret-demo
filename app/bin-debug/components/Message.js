@@ -2,7 +2,7 @@
 //  * @class
 //  * @desc 信息提示类
 //  * @example 
-//  * Message.show('sss')
+//  * Message.show('提示信息')
 //  */
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;

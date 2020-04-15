@@ -21,5 +21,11 @@
     {
       "name": "promise"
     }
-  ]
+  ],
+  "targets": {
+    "android": {
+      "appname": "2",
+      "packagename": "com.companyname"
+    }
+  }
 }
