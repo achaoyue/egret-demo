@@ -15,16 +15,16 @@ var StartScene = (function (_super) {
     }
     StartScene.prototype.initView = function () {
         // 背景
-        var bg = GameUtil.createBitmapByName('bg_jpg');
+        var bg = Utils.createBitmapByName('bg_jpg');
         this.addChild(bg);
-        bg.x = (GameUtil.getStageWidth() - bg.width) / 2;
-        bg.y = (GameUtil.getStageHeight() - bg.height) / 2;
+        bg.x = (Utils.getStageWidth() - bg.width) / 2;
+        bg.y = (Utils.getStageHeight() - bg.height) / 2;
         // 按钮
-        var startBtn = GameUtil.createBitmapByName('btn_start_png');
+        var startBtn = Utils.createBitmapByName('btn_start_png');
         this.addChild(startBtn);
-        startBtn.x = (GameUtil.getStageWidth() - startBtn.width) / 2;
-        startBtn.y = GameUtil.getStageHeight() - 350;
-        GameUtil.bitmapToBtn(startBtn, function () {
+        startBtn.x = (Utils.getStageWidth() - startBtn.width) / 2;
+        startBtn.y = Utils.getStageHeight() - 350;
+        Utils.bitmapToBtn(startBtn, function () {
             console.log('开始游戏');
             SceneController.showPlayScene();
         });

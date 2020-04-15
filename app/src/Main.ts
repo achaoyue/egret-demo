@@ -29,21 +29,17 @@
 
 class Main extends egret.DisplayObjectContainer {
 
-
-
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
+    // 添加到舞台
     private onAddToStage(event: egret.Event) {
 
         egret.lifecycle.addLifecycleListener((context) => {
             // custom lifecycle plugin
-
-            context.onUpdate = () => {
-
-            }
+            context.onUpdate = () => {}
         })
 
         egret.lifecycle.onPause = () => {
@@ -57,9 +53,6 @@ class Main extends egret.DisplayObjectContainer {
         this.runGame().catch(e => {
             console.log(e);
         })
-
-
-
     }
 
     private async runGame() {
@@ -67,6 +60,7 @@ class Main extends egret.DisplayObjectContainer {
         this.createGameScene();
     }
 
+    // 预加载资源
     private async loadResource() {
         try {
             const loadingView = new LoadingUI();
@@ -79,8 +73,6 @@ class Main extends egret.DisplayObjectContainer {
             console.error(e);
         }
     }
-
-    private textfield: egret.TextField;
 
     /**
      * 创建游戏场景

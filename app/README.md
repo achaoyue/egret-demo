@@ -16,22 +16,22 @@
 ``` js
 ┗ src
   ┣ common // 存放一些共用的类
-  ┃ ┗ GameUtil.ts // 游戏工具类，获取图片、舞台宽高等
+  ┃ ┗ Utils.ts // 游戏工具类，获取图片、舞台宽高等
   ┣ scene // 游戏场景
   ┃ ┣ BaseScene.ts // base场景，所有场景继承这个
   ┃ ┣ EndScene.ts // 结束场景
   ┃ ┣ PlayScene.ts // 游戏场景
   ┃ ┗ StartScene.ts // 开始场景
   ┃ ┣ GameData.ts // 存放游戏数据
+  ┃ ┣ GameData.ts // 存放游戏数据
   ┃ ┗ SceneControlloer.ts // 场景控制器
-  ┣ LoadingUI.ts // 加载页
   ┣ Main.ts // 游戏主类（入口，所有场景都放在这个上面显示）
   ┗ Platform.ts // 可用于定义一些window上的对象，接口（比如微信登录）
 ```
 
 ## 文件介绍
 
-### GameUtil 工具类
+### Utils 工具类
 - getStageHeight（获取舞台高度）
 - getStageWidth（获取舞台宽度）
 - createBitmapByName（根据传入的名称创建Bitmap）

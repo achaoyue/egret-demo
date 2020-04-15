@@ -78,11 +78,11 @@ var Main = (function (_super) {
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
+    // 添加到舞台
     Main.prototype.onAddToStage = function (event) {
         egret.lifecycle.addLifecycleListener(function (context) {
             // custom lifecycle plugin
-            context.onUpdate = function () {
-            };
+            context.onUpdate = function () { };
         });
         egret.lifecycle.onPause = function () {
             egret.ticker.pause();
@@ -107,6 +107,7 @@ var Main = (function (_super) {
             });
         });
     };
+    // 预加载资源
     Main.prototype.loadResource = function () {
         return __awaiter(this, void 0, void 0, function () {
             var loadingView, e_1;

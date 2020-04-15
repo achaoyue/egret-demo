@@ -16,13 +16,13 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.initView = function () {
         var _this = this;
         // 背景
-        var bg = GameUtil.createBitmapByName('bg2_jpg');
+        var bg = Utils.createBitmapByName('bg2_jpg');
         this.addChild(bg);
-        bg.x = (GameUtil.getStageWidth() - bg.width) / 2;
-        bg.y = (GameUtil.getStageHeight() - bg.height) / 2;
-        var egret_icon = GameUtil.createBitmapByName('egret_icon_png');
+        bg.x = (Utils.getStageWidth() - bg.width) / 2;
+        bg.y = (Utils.getStageHeight() - bg.height) / 2;
+        var egret_icon = Utils.createBitmapByName('egret_icon_png');
         this.addChild(egret_icon);
-        egret_icon.x = (GameUtil.getStageWidth() - egret_icon.width) / 2;
+        egret_icon.x = (Utils.getStageWidth() - egret_icon.width) / 2;
         egret_icon.y = 100;
         egret_icon.anchorOffsetX = (egret_icon.width) / 2;
         egret_icon.anchorOffsetY = egret_icon.height / 2;

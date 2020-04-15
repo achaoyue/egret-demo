@@ -10,13 +10,17 @@
 	"game": [
 		"bin-debug/scene/BaseScene.js",
 		"bin-debug/Main.js",
-		"bin-debug/Platform.js",
-		"bin-debug/common/GameUtil.js",
+		"bin-debug/api/Api.js",
+		"bin-debug/api/Http.js",
 		"bin-debug/common/Point.js",
+		"bin-debug/common/Utils.js",
+		"bin-debug/components/Message.js",
+		"bin-debug/Platform.js",
 		"bin-debug/scene/EndScene.js",
 		"bin-debug/scene/LoadingScene.js",
 		"bin-debug/scene/PlayScene.js",
 		"bin-debug/scene/SceneController.js",
-		"bin-debug/scene/StartScene.js"
+		"bin-debug/scene/StartScene.js",
+		"bin-debug/store/Data.js"
 	]
 }

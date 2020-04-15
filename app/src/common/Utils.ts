@@ -1,7 +1,7 @@
 /**
  * 工具类
  */
-class GameUtil {
+class Utils {
     /**
      * 获取舞台高度
      */
@@ -29,7 +29,7 @@ class GameUtil {
     /**
      * 根据name关键字创建一个MovieClip对象。name属性请参考resources/resource.json配置文件的内容。
      */
-    public static createMovieClipByName(name:string): egret.MovieClip {
+    public static createMovieClipByName(name: string): egret.MovieClip {
 
         let data_stay: any = RES.getRes(name + "_json")
         console.log(data_stay)
@@ -45,7 +45,7 @@ class GameUtil {
         // 记录原来的锚点
         const sourceAnchor: Point = new Point(bitmap.anchorOffsetX, bitmap.anchorOffsetY)
         // 监听触摸事件
-        bitmap.addEventListener(egret.TouchEvent.TOUCH_BEGIN, ()=> {
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_BEGIN, () => {
             // 改变按钮的锚点
             bitmap.anchorOffsetX = bitmap.width / 2
             bitmap.anchorOffsetY = bitmap.height / 2
@@ -58,7 +58,7 @@ class GameUtil {
             bitmap.scaleX = 0.95
             bitmap.scaleY = 0.95
         }, this)
-        bitmap.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=> {
+        bitmap.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
             reset()
             // 这个事件发生才算是点击按钮
             callback && callback()
