@@ -1,3 +1,6 @@
+/**
+ * @desc 用于处理背景图片平铺切换及滚动逻辑
+ */
 class BgMap extends BaseScene {
 
     // 背景图片高度
@@ -22,12 +25,10 @@ class BgMap extends BaseScene {
         let texture: egret.Texture = RES.getRes('img_bg_level_1_jpg');
         this.bgHeight = texture.textureHeight
 
-
         // 计算屏幕设备高度需要几张背景拼接
         this.bgCount = Math.ceil(Utils.getStageHeight() / this.bgHeight) + 2
 
         // 向视图中添加多张背景
-
         for (let index = 0; index < this.bgCount; index++) {
             let bg = Utils.createBitmapByName('img_bg_level_1_jpg')
             // 让背景宽度充满屏幕
@@ -35,30 +36,17 @@ class BgMap extends BaseScene {
             bg.y = -(this.bgHeight * index - this.bgHeight)
             this.addChild(bg)
         }
-
-        // 开始滚动
-        this.startScroll()
     }
 
     // 开始滚动
-    private startScroll() {
-        // 用帧事件进行动画处理
-        this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
-    }
-
-    // 滚动方法
-    private onEnterFrame() {
-        // 获取每一帧的时间差，用时间间隔位置位移会更加平滑
-        const now = egret.getTimer();
-        const time = this.timeOnEnterFrame;
-        const pass = now - time;
-        this.timeOnEnterFrame = now;
+    public startScroll(pass: number) {
 
         this.y += this.bgSpeed * pass;
 
-        // 当前视窗容器的y超过所有图片的高度时-1时，恢复默认
+        // 当前视窗容器的y超过所有图片数量的高度时-1时，恢复默认
         if (this.y > (this.bgHeight * (this.bgCount - 1) - this.bgHeight)) {
             this.y = 0
         }
     }
+
 };

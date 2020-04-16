@@ -2,7 +2,7 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
 /**
- * 工具类
+ * @desc 工具类
  */
 var Utils = (function () {
     function Utils() {
@@ -74,6 +74,21 @@ var Utils = (function () {
             bitmap.scaleX = 1;
             bitmap.scaleY = 1;
         }
+    };
+    /*
+     * 判断是否在屏幕外面
+     */
+    Utils.validateStageOut = function (positionY) {
+        if (Math.abs(positionY) > Utils.getStageHeight()) {
+            return true;
+        }
+        return false;
+    };
+    /*
+     * 生成随机整数
+     */
+    Utils.random = function (min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
     };
     return Utils;
 }());

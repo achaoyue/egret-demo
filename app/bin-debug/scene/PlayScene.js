@@ -8,6 +8,9 @@ var __extends = this && this.__extends || function __extends(t, e) {
 for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
 r.prototype = e.prototype, t.prototype = new r();
 };
+/**
+ * @desc 游戏进行时根场景
+ */
 var PlayScene = (function (_super) {
     __extends(PlayScene, _super);
     function PlayScene() {
@@ -15,7 +18,6 @@ var PlayScene = (function (_super) {
     }
     PlayScene.prototype.initView = function () {
         var Airs = new Air();
-        var MoveDemo = new Movejiaohu();
         this.addChild(Airs);
     };
     return PlayScene;

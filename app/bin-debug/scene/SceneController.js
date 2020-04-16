@@ -5,7 +5,7 @@ var SceneController = (function () {
     function SceneController() {
         this.startScene = new StartScene();
         this.playScene = new PlayScene();
-        this.endScene = new EndScene();
+        this.endScene = new EndScenes();
     }
     Object.defineProperty(SceneController, "instance", {
         get: function () {
@@ -54,7 +54,7 @@ var SceneController = (function () {
         var stage = this.instance.stage;
         stage.removeChildren();
         // 添加场景
-        stage.addChild(this.instance.playScene);
+        stage.addChild(this.instance.endScene);
     };
     /**
      * 添加场景

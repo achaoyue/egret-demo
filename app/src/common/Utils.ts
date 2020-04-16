@@ -1,5 +1,5 @@
 /**
- * 工具类
+ * @desc 工具类
  */
 class Utils {
     /**
@@ -75,6 +75,23 @@ class Utils {
             bitmap.scaleX = 1
             bitmap.scaleY = 1
         }
+    }
+
+    /*
+     * 判断是否在屏幕外面
+     */
+    public static validateStageOut(positionY: number): Boolean {
+        if (Math.abs(positionY) > Utils.getStageHeight()) {
+            return true
+        }
+        return false
+    }
+
+    /*
+     * 生成随机整数
+     */
+    public static random(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min)) + min;
     }
 
 }

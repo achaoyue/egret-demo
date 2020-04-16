@@ -8,6 +8,9 @@ var __extends = this && this.__extends || function __extends(t, e) {
 for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
 r.prototype = e.prototype, t.prototype = new r();
 };
+/**
+ * @desc 用于处理背景图片平铺切换及滚动逻辑
+ */
 var BgMap = (function (_super) {
     __extends(BgMap, _super);
     function BgMap() {
@@ -35,23 +38,11 @@ var BgMap = (function (_super) {
             bg.y = -(this.bgHeight * index - this.bgHeight);
             this.addChild(bg);
         }
-        // 开始滚动
-        this.startScroll();
     };
     // 开始滚动
-    BgMap.prototype.startScroll = function () {
-        // 用帧事件进行动画处理
-        this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
-    };
-    // 滚动方法
-    BgMap.prototype.onEnterFrame = function () {
-        // 获取每一帧的时间差，用时间间隔位置位移会更加平滑
-        var now = egret.getTimer();
-        var time = this.timeOnEnterFrame;
-        var pass = now - time;
-        this.timeOnEnterFrame = now;
+    BgMap.prototype.startScroll = function (pass) {
         this.y += this.bgSpeed * pass;
-        // 当前视窗容器的y超过所有图片的高度时-1时，恢复默认
+        // 当前视窗容器的y超过所有图片数量的高度时-1时，恢复默认
         if (this.y > (this.bgHeight * (this.bgCount - 1) - this.bgHeight)) {
             this.y = 0;
         }
