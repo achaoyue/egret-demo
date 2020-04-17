@@ -83,6 +83,7 @@ class Main extends egret.DisplayObjectContainer {
         SceneController.instance.setStage(this.stage)
         SceneController.initGame()
 
+        // store中存储根场景，用于挂载一些全局事件
         GameData.Main = this
 
     }
