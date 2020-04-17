@@ -17,21 +17,15 @@ var SceneController = (function () {
         enumerable: true,
         configurable: true
     });
-    /**
-     * 设置存放游戏场景的主容器
-     */
+    // 设置存放游戏场景的主容器
     SceneController.prototype.setStage = function (stage) {
         this.stage = stage;
     };
-    /**
-     * 获取存放游戏场景的主容器
-     */
+    // 获取存放游戏场景的主容器
     SceneController.prototype.getState = function () {
         return this.stage;
     };
-    /**
-     * 初始化游戏，显示开始游戏场景
-     */
+    // 初始化游戏，显示开始游戏场景
     SceneController.initGame = function () {
         var stage = this.instance.stage;
         stage.removeChildren();
@@ -53,19 +47,14 @@ var SceneController = (function () {
     SceneController.showEndScene = function () {
         var stage = this.instance.stage;
         stage.removeChildren();
-        // 添加场景
         stage.addChild(this.instance.endScene);
     };
-    /**
-     * 添加场景
-     */
+    // 添加场景
     SceneController.addScene = function (scene) {
         var stage = this.instance.stage;
         stage.addChild(scene);
     };
-    /**
-     * 替换场景
-     */
+    // 替换场景
     SceneController.replaceScene = function (scene) {
         var stage = this.instance.stage;
         stage.removeChildren();

@@ -4,13 +4,9 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var GameData = (function () {
     function GameData() {
     }
-    /**
-     * 游戏关卡
-     */
+    // 游戏关卡
     GameData.level = 0;
-    /**
-     * 玩家走的步数
-     */
+    // 玩家走的步数
     GameData.step = 0;
     // 格子的边距
     GameData.gridMargin = 10;

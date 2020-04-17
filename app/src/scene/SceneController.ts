@@ -1,6 +1,7 @@
 class SceneController {
     private stage: egret.Stage; // 场景主容器
-    // 所有页面场景
+
+    // 页面场景
     private startScene: StartScene // 开始场景
     private playScene: PlayScene // 游戏场景
     private endScene: EndScenes // 结束场景
@@ -20,23 +21,17 @@ class SceneController {
         this.endScene = new EndScenes()
     }
 
-    /**
-     * 设置存放游戏场景的主容器
-     */
+    // 设置存放游戏场景的主容器
     public setStage(stage: egret.Stage) {
         this.stage = stage
     }
 
-    /**
-     * 获取存放游戏场景的主容器
-     */
+    // 获取存放游戏场景的主容器
     public getState() {
         return this.stage
     }
 
-    /**
-     * 初始化游戏，显示开始游戏场景
-     */
+    // 初始化游戏，显示开始游戏场景
     public static initGame() {
         let stage = this.instance.stage
         stage.removeChildren();
@@ -60,21 +55,16 @@ class SceneController {
     public static showEndScene() {
         let stage = this.instance.stage
         stage.removeChildren();
-        // 添加场景
         stage.addChild(this.instance.endScene)
     }
 
-    /**
-     * 添加场景
-     */
+    // 添加场景
     public static addScene(scene: egret.DisplayObject) {
         let stage = this.instance.stage
         stage.addChild(scene);
     }
 
-    /**
-     * 替换场景
-     */
+    // 替换场景
     public static replaceScene(scene: egret.DisplayObject) {
         let stage = this.instance.stage
         stage.removeChildren();

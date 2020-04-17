@@ -1,4 +1,4 @@
-class Movejiaohu extends BaseScene {
+class Example extends BaseScene {
 
     private infoText: egret.TextField;
 
@@ -26,10 +26,8 @@ class Movejiaohu extends BaseScene {
 
             tw.to({ x: evt.localX, y: evt.localY }, 300)
 
-
             var isHit: boolean = cartoon.hitTestPoint(evt.localX, evt.localY, true);
             this.infoText.text = "点到我了吗: " + isHit;
-
 
         }, this);
 

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,bg2_jpg,cartoon_png,img_bg_level_1_jpg,hero_png,end_tip_success_png,bullet_png,youjun_mp3,bullet_mp3,bingdu_png",
+			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,cartoon_png,end_tip_success_png",
 			"name": "preload"
 		}
 	],
@@ -22,54 +22,14 @@
 			"url": "assets/images/btn_start.png"
 		},
 		{
-			"name": "bg2_jpg",
-			"type": "image",
-			"url": "assets/images/bg2.jpg"
-		},
-		{
 			"name": "cartoon_png",
 			"type": "image",
 			"url": "assets/images/cartoon.png"
 		},
 		{
-			"name": "img_bg_level_1_jpg",
-			"type": "image",
-			"url": "assets/images/bg/img_bg_level_1.jpg"
-		},
-		{
-			"name": "hero_png",
-			"type": "image",
-			"url": "assets/images/plane/hero.png"
-		},
-		{
-			"name": "bullet_png",
-			"type": "image",
-			"url": "assets/images/bullet/bullet.png"
-		},
-		{
-			"name": "bingdu_png",
-			"type": "image",
-			"url": "assets/images/bingdu.png"
-		},
-		{
-			"name": "bingdu_png",
-			"type": "image",
-			"url": "assets/images/bingdu.png"
-		},
-		{
 			"name": "end_tip_success_png",
 			"type": "image",
 			"url": "assets/images/end_tip_success.png"
-		},
-		{
-			"name": "youjun_mp3",
-			"type": "sound",
-			"url": "assets/audio/youjun.mp3"
-		},
-		{
-			"name": "bullet_mp3",
-			"type": "sound",
-			"url": "assets/audio/bullet.mp3"
 		}
 	]
 }

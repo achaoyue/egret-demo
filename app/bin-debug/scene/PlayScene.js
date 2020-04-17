@@ -17,12 +17,12 @@ var PlayScene = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     PlayScene.prototype.initView = function () {
-        var Airs = new Air();
-        this.addChild(Airs);
+        var example = new Example();
+        this.addChild(example);
         // 用于处理一些全局性的事件
-        GameData.Main.addEventListener(GameEvent.GAME_OVER, function () {
-            Airs.removeListener();
-        }, this);
+        // GameData.Main.addEventListener(GameEvent.GAME_OVER,()=>{
+        //     Example.removeListener()
+        // },this)
     };
     return PlayScene;
 }(BaseScene));

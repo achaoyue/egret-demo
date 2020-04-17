@@ -142,6 +142,7 @@ var Main = (function (_super) {
         // 将主场景控制权交至SceneController统一管
         SceneController.instance.setStage(this.stage);
         SceneController.initGame();
+        // store中存储根场景，用于挂载一些全局事件
         GameData.Main = this;
     };
     return Main;
