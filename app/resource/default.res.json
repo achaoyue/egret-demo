@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,cartoon_png,end_tip_success_png",
+			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,cartoon_png,end_tip_success_png,luckybg_jpg,bg_mp3,lhj_png,prize01_png,prize02_png,prize03_png,prize04_png,prize05_png,prize06_png,prize07_png,prize08_png,prize09_png,prize10_png",
 			"name": "preload"
 		}
 	],
@@ -9,7 +9,17 @@
 		{
 			"name": "bg_jpg",
 			"type": "image",
-			"url": "assets/images/bg.jpg"
+			"url": "assets/images/bg/bg.jpg"
+		},
+		{
+			"name": "luckybg_jpg",
+			"type": "image",
+			"url": "assets/images/bg/luckybg.jpg"
+		},
+		{
+			"name": "lhj_png",
+			"type": "image",
+			"url": "assets/images/bg/lhj.png"
 		},
 		{
 			"name": "egret_icon_png",
@@ -30,6 +40,66 @@
 			"name": "end_tip_success_png",
 			"type": "image",
 			"url": "assets/images/end_tip_success.png"
+		},
+		{
+			"name": "bg_mp3",
+			"type": "sound",
+			"url": "assets/audio/bg.mp3"
+		},
+		{
+			"name": "prizebg_png",
+			"type": "image",
+			"url": "assets/images/other/2p.png"
+		},
+		{
+			"name": "prize01_png",
+			"type": "image",
+			"url": "assets/images/other/1.png"
+		},
+		{
+			"name": "prize02_png",
+			"type": "image",
+			"url": "assets/images/other/2.png"
+		},
+		{
+			"name": "prize03_png",
+			"type": "image",
+			"url": "assets/images/other/3.png"
+		},
+		{
+			"name": "prize04_png",
+			"type": "image",
+			"url": "assets/images/other/4.png"
+		},
+		{
+			"name": "prize05_png",
+			"type": "image",
+			"url": "assets/images/other/5.png"
+		},
+		{
+			"name": "prize06_png",
+			"type": "image",
+			"url": "assets/images/other/6.png"
+		},
+		{
+			"name": "prize07_png",
+			"type": "image",
+			"url": "assets/images/other/7.png"
+		},
+		{
+			"name": "prize08_png",
+			"type": "image",
+			"url": "assets/images/other/8.png"
+		},
+		{
+			"name": "prize09_png",
+			"type": "image",
+			"url": "assets/images/other/9.png"
+		},
+		{
+			"name": "prize10_png",
+			"type": "image",
+			"url": "assets/images/other/10.png"
 		}
 	]
 }

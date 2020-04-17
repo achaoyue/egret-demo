@@ -16,6 +16,8 @@ var StartScene = (function (_super) {
     StartScene.prototype.initView = function () {
         // 背景
         var bg = Utils.createBitmapByName('bg_jpg');
+        bg.width = Utils.getStageWidth();
+        bg.height = Utils.getStageHeight();
         this.addChild(bg);
         bg.x = (Utils.getStageWidth() - bg.width) / 2;
         bg.y = (Utils.getStageHeight() - bg.height) / 2;

@@ -3,6 +3,8 @@ class StartScene extends BaseScene {
     protected initView() {
         // 背景
         let bg: egret.Bitmap = Utils.createBitmapByName('bg_jpg')
+        bg.width = Utils.getStageWidth()
+        bg.height = Utils.getStageHeight()
         this.addChild(bg)
         bg.x = (Utils.getStageWidth() - bg.width) / 2
         bg.y = (Utils.getStageHeight() - bg.height) / 2
