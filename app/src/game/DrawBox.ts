@@ -29,7 +29,7 @@ class DrawBox extends BaseScene {
 
     start() {
         this.colum1.scroll(0)
-        this.colum2.scroll(200)
-        this.colum3.scroll(400)
+        this.colum2.scroll(400)
+        this.colum3.scroll(600)
     }
 }

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,cartoon_png,end_tip_success_png,luckybg_jpg,bg_mp3,lhj_png,gobtn_png,prize01_png,prize02_png,prize03_png,prize04_png,prize05_png,prize06_png,prize07_png,prize08_png,prize09_png",
+			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,cartoon_png,bullet_mp3,end_tip_success_png,luckybg_jpg,bg_mp3,lhj_png,gobtn_png,prize01_png,prize02_png,prize03_png,prize04_png,prize05_png,prize06_png,prize07_png,prize08_png,prize09_png",
 			"name": "preload"
 		}
 	],
@@ -65,6 +65,11 @@
 			"name": "prize02_png",
 			"type": "image",
 			"url": "assets/images/other/2.png"
+		},
+		{
+			"name": "bullet_mp3",
+			"type": "sound",
+			"url": "assets/audio/bullet.mp3"
 		},
 		{
 			"name": "prize03_png",

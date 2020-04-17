@@ -7,7 +7,7 @@ class Example extends BaseScene {
         luckybg.width = Utils.getStageWidth()
         luckybg.height = Utils.getStageHeight()
         this.addChild(luckybg)
-        
+
 
         let lhj_bg: egret.Bitmap = Utils.createBitmapByName('lhj_png')
         lhj_bg.width = Utils.getStageWidth()
@@ -18,17 +18,18 @@ class Example extends BaseScene {
         this.addChild(drawbox)
 
 
-        var sound:egret.Sound = RES.getRes("bg_mp3");
-        sound.play();
+        const soundBG: egret.Sound = RES.getRes("bg_mp3");
+        var channel: egret.SoundChannel = soundBG.play(0, 1);
+        channel.volume = 0.1
 
-        // var sound:egret.Sound = RES.getRes("bg_mp3");
-        // sound.play();
+        const soundBullet = RES.getRes('bullet_mp3')
 
         // 开始按钮
         let gobtn = new GoBtn()
         this.addChild(gobtn)
-        gobtn.btnHandle(()=>{
+        gobtn.btnHandle(() => {
             drawbox.start()
+            // soundBullet.play();
         })
 
 
