@@ -19,8 +19,6 @@ var BgMap = (function (_super) {
         _this.bgWidth = Utils.getStageWidth();
         // 控制滚动速度
         _this.bgSpeed = 0.3;
-        // 记录上一帧的时间
-        _this.timeOnEnterFrame = 0;
         return _this;
     }
     //  初始化

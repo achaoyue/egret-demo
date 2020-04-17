@@ -82,6 +82,9 @@ class Main extends egret.DisplayObjectContainer {
         // 将主场景控制权交至SceneController统一管
         SceneController.instance.setStage(this.stage)
         SceneController.initGame()
+
+        GameData.Main = this
+
     }
 
 }

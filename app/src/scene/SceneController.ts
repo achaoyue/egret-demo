@@ -1,6 +1,5 @@
 class SceneController {
     private stage: egret.Stage; // 场景主容器
-
     // 所有页面场景
     private startScene: StartScene // 开始场景
     private playScene: PlayScene // 游戏场景

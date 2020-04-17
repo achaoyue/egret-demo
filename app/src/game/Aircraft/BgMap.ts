@@ -15,9 +15,6 @@ class BgMap extends BaseScene {
     // 控制滚动速度
     private bgSpeed: number = 0.3;
 
-    // 记录上一帧的时间
-    private timeOnEnterFrame: number = 0;
-
     //  初始化
     initView() {
 

@@ -19,6 +19,10 @@ var PlayScene = (function (_super) {
     PlayScene.prototype.initView = function () {
         var Airs = new Air();
         this.addChild(Airs);
+        // 用于处理一些全局性的事件
+        GameData.Main.addEventListener(GameEvent.GAME_OVER, function () {
+            Airs.removeListener();
+        }, this);
     };
     return PlayScene;
 }(BaseScene));

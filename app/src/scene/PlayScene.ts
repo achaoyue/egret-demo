@@ -8,5 +8,11 @@ class PlayScene extends BaseScene {
         var Airs = new Air()
         this.addChild(Airs)
 
+        // 用于处理一些全局性的事件
+        GameData.Main.addEventListener(GameEvent.GAME_OVER,()=>{
+            Airs.removeListener()
+        },this)
+        
+
     }
 }

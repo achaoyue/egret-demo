@@ -18,10 +18,6 @@ class Bullet extends BaseScene {
 
     initView() {
         this.soundBullet = RES.getRes('bullet_mp3')
-
-        // this.addEventListener(GameEvent.GAME_OVER,()=>{
-        //     console.log(111111111111111)
-        // }, this);
     }
 
     // 控制子弹发射的频率
@@ -104,14 +100,13 @@ class Bullet extends BaseScene {
                 target.y = Utils.random(0, Utils.getStageWidth()) * 0.09
             }
 
-            if (val <= 30) {
+            if (val <= 40) {
 
-                // 将场景内的事件全部清除
-                cls.removeListener()
-
-                setTimeout(() => {
-                    SceneController.showEndScene()
-                }, 1000)
+                // 发送事件将场景内的事件全部清除
+                var event: GameEvent = new GameEvent(GameEvent.GAME_OVER);
+                GameData.Main.dispatchEvent(event);
+                // 展示结束场景
+                SceneController.showEndScene()
 
             }
         }

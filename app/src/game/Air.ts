@@ -63,8 +63,8 @@ class Air extends BaseScene {
         // 设置当前场景可为点击
         this.touchEnabled = true;
 
-        this.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this)
-        this.stage.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this)
+        this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this)
+        this.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this)
 
         // 用帧事件进行动画处理
         this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
@@ -72,16 +72,16 @@ class Air extends BaseScene {
 
     public removeListener() {
         this.touchEnabled = false;
-        // this.stage.removeEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
-        // this.stage.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this);
-        // this.stage.removeEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this);
-        // this.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this);
+        this.removeEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
+        this.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this);
+        this.removeEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this);
+        this.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this);
     }
 
     // 在场景开始点击时
     private touchBegin(e: egret.TouchEvent) {
         this.plane.fly(e.stageX - (this.plane.width / 2), e.stageY - (this.plane.height / 2))
-        this.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this)
+        this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this)
     }
 
     // 在场景触点移动时

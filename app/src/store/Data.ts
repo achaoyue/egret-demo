@@ -3,6 +3,7 @@ class GameData {
      * 游戏关卡
      */
     public static level: number = 0
+    public static Main:any
     /**
      * 玩家走的步数
      */
