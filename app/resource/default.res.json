@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,cartoon_png,end_tip_success_png,luckybg_jpg,bg_mp3,lhj_png,prize01_png,prize02_png,prize03_png,prize04_png,prize05_png,prize06_png,prize07_png,prize08_png,prize09_png,prize10_png",
+			"keys": "bg_jpg,egret_icon_png,description_json,btn_start_png,cartoon_png,end_tip_success_png,luckybg_jpg,bg_mp3,lhj_png,gobtn_png,prize01_png,prize02_png,prize03_png,prize04_png,prize05_png,prize06_png,prize07_png,prize08_png,prize09_png",
 			"name": "preload"
 		}
 	],
@@ -35,6 +35,11 @@
 			"name": "cartoon_png",
 			"type": "image",
 			"url": "assets/images/cartoon.png"
+		},
+		{
+			"name": "gobtn_png",
+			"type": "image",
+			"url": "assets/images/go.png"
 		},
 		{
 			"name": "end_tip_success_png",
@@ -95,11 +100,6 @@
 			"name": "prize09_png",
 			"type": "image",
 			"url": "assets/images/other/9.png"
-		},
-		{
-			"name": "prize10_png",
-			"type": "image",
-			"url": "assets/images/other/10.png"
 		}
 	]
 }

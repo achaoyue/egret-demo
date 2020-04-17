@@ -1,53 +1,62 @@
 class DrawColum extends BaseScene {
 
-    // 上一帧的时间差
-    private timeOnEnterFrame: number = 0;
+    private itemcon: egret.DisplayObjectContainer
+    private itemconHeight: number
 
     initView() {
 
         this.width = 134
         this.createImsItem()
+
     }
 
     private createImsItem() {
-        // var con = new egret.DisplayObjectContainer()
-        // let ims = Utils.createBitmapByName('prize06_png')
-        // con.width = 134
-        // con.height = 134
-        // ims.width = 120
-        // ims.height = 120
-        // ims.anchorOffsetX = ims.width / 2
-        // ims.anchorOffsetY = ims.height / 2
-        // ims.x = con.width / 2
-        // ims.y = con.height / 2
-        // con.addChild(ims)
-        var con = new egret.DisplayObjectContainer()
-        con.width = 134
-        // con.height = 134
+        // 每一列的容器
+        this.itemcon = new egret.DisplayObjectContainer()
+        this.itemcon.width = 134
 
+        // 图片数组
+        var imgArr = []
         for (let index = 0; index < 9; index++) {
-            console.log(index)
-            let ims = Utils.createBitmapByName(`prize0${index + 1}_png`)
+            imgArr.push(`prize0${index + 1}_png`)
+        }
+        imgArr = [...imgArr, ...imgArr, ...imgArr, ...imgArr, ...imgArr]
+        this.itemconHeight = imgArr.length * 134
+        for (let index = 0; index < imgArr.length; index++) {
+
+            // 每个图片的格式容器
+            var imsCon = new egret.Sprite()
+            imsCon.width = 134
+            imsCon.height = 134
+            imsCon.x = 0
+            imsCon.y = imsCon.height * index
+
+            // 添加图片并居中
+            let ims = Utils.createBitmapByName(imgArr[index])
             ims.width = 120
             ims.height = 120
             ims.anchorOffsetX = ims.width / 2
             ims.anchorOffsetY = ims.height / 2
-            ims.x = 134 / 2
-            ims.y = 134 / 2 + 134 * index
-            con.addChild(ims)
+            ims.x = imsCon.width / 2
+            ims.y = imsCon.width / 2
+
+            imsCon.addChild(ims)
+            this.itemcon.addChild(imsCon)
+
         }
 
-        this.addChild(con)
+        this.addChild(this.itemcon)
 
-        this.addEventListener(egret.Event.ENTER_FRAME, () => {
-            var now = egret.getTimer();
-            var time = this.timeOnEnterFrame;
-            var pass = now - time;
-            this.timeOnEnterFrame = egret.getTimer();
+    }
 
-            con.y +=  -(100 / pass)
-
-        }, this)
+    scroll(delay: number = 0) {
+        this.itemcon.y = 0
+        egret.Tween.removeTweens(this.itemcon);
+        var tw = egret.Tween.get(this.itemcon);
+        tw.wait(delay)
+        tw.to({ x: 0, y: -(this.itemconHeight - 134 * 3) }, 5800, egret.Ease.sineInOut).call(() => {
+            console.log(this.itemcon.height)
+        })
     }
 
 }

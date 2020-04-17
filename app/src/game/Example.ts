@@ -19,7 +19,18 @@ class Example extends BaseScene {
 
 
         var sound:egret.Sound = RES.getRes("bg_mp3");
+        sound.play();
+
+        // var sound:egret.Sound = RES.getRes("bg_mp3");
         // sound.play();
+
+        // 开始按钮
+        let gobtn = new GoBtn()
+        this.addChild(gobtn)
+        gobtn.btnHandle(()=>{
+            drawbox.start()
+        })
+
 
     }
 }
