@@ -5,7 +5,7 @@ var SceneController = (function () {
     function SceneController() {
         this.startScene = new StartScene();
         this.playScene = new PlayScene();
-        this.endScene = new EndScenes();
+        this.endScene = new EndScene();
     }
     Object.defineProperty(SceneController, "instance", {
         get: function () {
@@ -36,6 +36,7 @@ var SceneController = (function () {
      * 显示游戏场景
      */
     SceneController.showPlayScene = function () {
+        console.log('showPlaySceneshowPlayScene');
         var stage = this.instance.stage;
         stage.removeChildren();
         // 添加场景

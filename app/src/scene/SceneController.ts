@@ -4,7 +4,7 @@ class SceneController {
     // 页面场景
     private startScene: StartScene // 开始场景
     private playScene: PlayScene // 游戏场景
-    private endScene: EndScenes // 结束场景
+    private endScene: EndScene // 结束场景
 
     public static sceneController: SceneController
 
@@ -18,7 +18,7 @@ class SceneController {
     public constructor() {
         this.startScene = new StartScene()
         this.playScene = new PlayScene()
-        this.endScene = new EndScenes()
+        this.endScene = new EndScene()
     }
 
     // 设置存放游戏场景的主容器
@@ -43,6 +43,7 @@ class SceneController {
      * 显示游戏场景
      */
     public static showPlayScene() {
+        console.log('showPlaySceneshowPlayScene')
         let stage = this.instance.stage
         stage.removeChildren();
         // 添加场景

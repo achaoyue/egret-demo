@@ -17,6 +17,7 @@
 		"bin-debug/common/Utils.js",
 		"bin-debug/components/Message.js",
 		"bin-debug/Platform.js",
+		"bin-debug/game/TimerPanel.js",
 		"bin-debug/Main.js",
 		"bin-debug/scene/EndScenes.js",
 		"bin-debug/scene/LoadingScene.js",
